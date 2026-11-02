@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta inspirada en la calculadora de iOS -->
+    <color name="calculator_background">#FF000000</color>
+    <color name="display_primary_text">#FFFFFFFF</color>
+    <color name="display_secondary_text">#FF8E8E93</color>
+    <color name="display_error_text">#FFFF453A</color>
+
+    <color name="button_number_background">#FF333333</color>
+    <color name="button_number_text">#FFFFFFFF</color>
+
+    <color name="button_operator_background">#FFFF9F0A</color>
+    <color name="button_operator_text">#FFFFFFFF</color>
+    <color name="button_operator_active_background">#FFFFFFFF</color>
+    <color name="button_operator_active_text">#FFFF9F0A</color>
+
+    <color name="button_control_background">#FFA5A5A5</color>
+    <color name="button_control_text">#FF000000</color>
+
+    <color name="history_item_background">#FF1C1C1E</color>
+    <color name="history_divider">#FF3A3A3C</color>
+</resources>

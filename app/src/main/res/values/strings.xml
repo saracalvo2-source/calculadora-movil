@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Calculadora iOS</string>
+
+    <!-- Dígitos del teclado -->
+    <string name="digit_0">0</string>
+    <string name="digit_1">1</string>
+    <string name="digit_2">2</string>
+    <string name="digit_3">3</string>
+    <string name="digit_4">4</string>
+    <string name="digit_5">5</string>
+    <string name="digit_6">6</string>
+    <string name="digit_7">7</string>
+    <string name="digit_8">8</string>
+    <string name="digit_9">9</string>
+
+    <!-- Operadores y acciones -->
+    <string name="symbol_add">+</string>
+    <string name="symbol_subtract">−</string>
+    <string name="symbol_multiply">×</string>
+    <string name="symbol_divide">÷</string>
+    <string name="symbol_equals">=</string>
+    <string name="symbol_percent">%</string>
+    <string name="symbol_toggle_sign">+/−</string>
+    <string name="symbol_decimal">.</string>
+    <string name="action_clear">AC</string>
+
+    <!-- Pantalla principal -->
+    <string name="initial_value">0</string>
+    <string name="history_button">Historial</string>
+    <string name="history_button_description">Abrir historial de operaciones</string>
+
+    <!-- Errores -->
+    <string name="error_division_by_zero">No se puede dividir por cero</string>
+    <string name="error_invalid_input">Entrada inválida</string>
+    <string name="error_display">Error</string>
+
+    <!-- Historial -->
+    <string name="history_title">Historial</string>
+    <string name="history_empty">Aún no hay operaciones</string>
+    <string name="history_back_description">Volver a la calculadora</string>
+    <string name="history_entry_format">%1$s %2$s %3$s = %4$s</string>
+</resources>
