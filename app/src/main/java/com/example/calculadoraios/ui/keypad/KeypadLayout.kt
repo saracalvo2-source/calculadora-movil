@@ -12,9 +12,13 @@ object KeypadLayout {
 
     private const val WIDE_KEY_WEIGHT = 2f
 
-    val rows: List<List<CalculatorKey>> = listOf(
+    private val clearKey = CalculatorKey(R.string.action_clear, CalculatorEvent.Clear, KeyStyle.CONTROL)
+    private val deleteKey = CalculatorKey(R.string.action_delete, CalculatorEvent.DeleteDigit, KeyStyle.CONTROL)
+
+    /** Filas del teclado; la primera tecla es ⌫ mientras se escribe y AC en otro caso. */
+    fun rows(showDeleteKey: Boolean): List<List<CalculatorKey>> = listOf(
         listOf(
-            CalculatorKey(R.string.action_clear, CalculatorEvent.Clear, KeyStyle.CONTROL),
+            if (showDeleteKey) deleteKey else clearKey,
             CalculatorKey(R.string.symbol_toggle_sign, CalculatorEvent.ToggleSign, KeyStyle.CONTROL),
             CalculatorKey(R.string.symbol_percent, CalculatorEvent.Percent, KeyStyle.CONTROL),
             operatorKey(R.string.symbol_divide, Operation.DIVIDE)

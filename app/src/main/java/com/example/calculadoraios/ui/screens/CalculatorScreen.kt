@@ -57,6 +57,7 @@ fun CalculatorScreen(
         )
         Keypad(
             activeOperation = uiState.pendingOperation,
+            showDeleteKey = uiState.canDeleteDigit,
             onEvent = onEvent
         )
     }
@@ -84,10 +85,11 @@ private fun HistoryLink(onClick: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 private fun Keypad(
     activeOperation: Operation?,
+    showDeleteKey: Boolean,
     onEvent: (CalculatorEvent) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(KEY_SPACING)) {
-        KeypadLayout.rows.forEach { row ->
+        KeypadLayout.rows(showDeleteKey).forEach { row ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(KEY_SPACING)

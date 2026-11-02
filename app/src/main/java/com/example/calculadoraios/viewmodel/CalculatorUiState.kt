@@ -17,6 +17,8 @@ data class CalculatorUiState(
     val pendingOperation: Operation? = null,
     /** Error activo, si lo hay. */
     val error: CalculatorError? = null,
+    /** true mientras se escribe un número que se puede borrar dígito a dígito (la tecla AC pasa a ⌫). */
+    val canDeleteDigit: Boolean = false,
     /** Operaciones completadas, en orden cronológico. */
     val history: List<HistoryEntry> = emptyList()
 )

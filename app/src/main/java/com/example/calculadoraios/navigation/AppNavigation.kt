@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.calculadoraios.ui.screens.CalculatorScreen
 import com.example.calculadoraios.ui.screens.HistoryScreen
+import com.example.calculadoraios.viewmodel.CalculatorEvent
 import com.example.calculadoraios.viewmodel.CalculatorViewModel
 
 /** Rutas de navegación de la aplicación. */
@@ -40,7 +41,8 @@ fun AppNavigation(viewModel: CalculatorViewModel = viewModel()) {
         composable(AppRoutes.HISTORY) {
             HistoryScreen(
                 history = uiState.history,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
+                onClearHistory = { viewModel.onEvent(CalculatorEvent.ClearHistory) }
             )
         }
     }

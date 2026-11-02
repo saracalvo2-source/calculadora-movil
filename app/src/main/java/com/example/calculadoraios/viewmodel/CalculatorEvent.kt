@@ -14,4 +14,6 @@ sealed interface CalculatorEvent {
     data object Clear : CalculatorEvent
     data object ToggleSign : CalculatorEvent
     data object Percent : CalculatorEvent
+    data object DeleteDigit : CalculatorEvent
+    data object ClearHistory : CalculatorEvent
 }

@@ -3,6 +3,7 @@ package com.example.calculadoraios.viewmodel
 import com.example.calculadoraios.model.CalculatorError
 import com.example.calculadoraios.model.Operation
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -109,5 +110,44 @@ class CalculatorViewModelTest {
         press(digit(7), operator(Operation.DIVIDE))
         assertEquals(Operation.DIVIDE, viewModel.uiState.value.pendingOperation)
         assertEquals("7", viewModel.uiState.value.pendingOperand)
+    }
+
+    @Test
+    fun `borrar digito quita el ultimo caracter y vuelve a cero`() {
+        press(digit(1), digit(2), CalculatorEvent.Decimal, digit(5))
+        assertTrue(viewModel.uiState.value.canDeleteDigit)
+        press(CalculatorEvent.DeleteDigit)
+        assertEquals("12.", display)
+        press(CalculatorEvent.DeleteDigit, CalculatorEvent.DeleteDigit, CalculatorEvent.DeleteDigit)
+        assertEquals("0", display)
+        assertFalse(viewModel.uiState.value.canDeleteDigit)
+    }
+
+    @Test
+    fun `borrar digito en negativo no deja el signo solo`() {
+        press(digit(7), CalculatorEvent.ToggleSign, CalculatorEvent.DeleteDigit)
+        assertEquals("0", display)
+    }
+
+    @Test
+    fun `borrar digito no modifica un resultado`() {
+        press(digit(5), operator(Operation.ADD), digit(3), CalculatorEvent.Equals)
+        assertFalse(viewModel.uiState.value.canDeleteDigit)
+        press(CalculatorEvent.DeleteDigit)
+        assertEquals("8", display)
+    }
+
+    @Test
+    fun `borrar digito corrige el segundo operando`() {
+        press(digit(9), operator(Operation.SUBTRACT), digit(4), digit(5), CalculatorEvent.DeleteDigit, CalculatorEvent.Equals)
+        assertEquals("5", display)
+    }
+
+    @Test
+    fun `borrar historial vacia la lista y conserva el calculo`() {
+        press(digit(5), operator(Operation.ADD), digit(3), CalculatorEvent.Equals)
+        press(CalculatorEvent.ClearHistory)
+        assertTrue(viewModel.uiState.value.history.isEmpty())
+        assertEquals("8", display)
     }
 }

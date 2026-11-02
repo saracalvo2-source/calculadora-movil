@@ -17,6 +17,9 @@ import kotlinx.coroutines.flow.update
  *
  * Comportamiento definido:
  * - AC limpia el cálculo en curso (el historial se conserva).
+ * - Mientras se escribe un número, la tecla AC pasa a ⌫ y borra el último dígito;
+ *   al quedar en 0, o tras un resultado, vuelve a ser AC (como en iOS).
+ * - Borrar historial vacía la lista sin afectar el cálculo en curso.
  * - Un operador tras otro operador solo reemplaza la operación pendiente.
  * - Operaciones encadenadas (2 + 3 × ...) resuelven la anterior de izquierda a derecha.
  * - Pulsar = de forma repetida vuelve a aplicar la última operación al resultado.
@@ -50,6 +53,8 @@ class CalculatorViewModel(
             CalculatorEvent.Clear -> onClear()
             CalculatorEvent.ToggleSign -> onToggleSign()
             CalculatorEvent.Percent -> onPercent()
+            CalculatorEvent.DeleteDigit -> onDeleteDigit()
+            CalculatorEvent.ClearHistory -> onClearHistory()
         }
         publishState()
     }
@@ -131,6 +136,17 @@ class CalculatorViewModel(
         startNewInput = true
     }
 
+    /** Borra el último dígito escrito; si no queda ninguno, el valor vuelve a 0. */
+    private fun onDeleteDigit() {
+        if (!canDeleteDigit()) return
+        val remaining = currentInput.dropLast(1)
+        currentInput = if (remaining.isEmpty() || remaining == NEGATIVE_SIGN) INITIAL_INPUT else remaining
+    }
+
+    private fun onClearHistory() {
+        _uiState.update { it.copy(history = emptyList()) }
+    }
+
     /**
      * Resuelve la operación pendiente con [second] como segundo operando.
      * @return true si el cálculo fue válido, false si produjo un error.
@@ -188,6 +204,10 @@ class CalculatorViewModel(
 
     private fun hasError(): Boolean = _uiState.value.error != null
 
+    /** Solo se borra mientras el usuario escribe un número distinto de 0. */
+    private fun canDeleteDigit(): Boolean =
+        !hasError() && !startNewInput && currentInput != INITIAL_INPUT
+
     private fun digitCount(input: String): Int = input.count { it.isDigit() }
 
     /** Sincroniza el estado interno con el estado observable que consume la UI. */
@@ -197,7 +217,8 @@ class CalculatorViewModel(
             state.copy(
                 displayValue = currentInput,
                 pendingOperand = if (operation != null) accumulator?.let(engine::format) else null,
-                pendingOperation = operation
+                pendingOperation = operation,
+                canDeleteDigit = canDeleteDigit()
             )
         }
     }

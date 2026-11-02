@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,7 +40,8 @@ private val ITEM_SPACING = 8.dp
 @Composable
 fun HistoryScreen(
     history: List<HistoryEntry>,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onClearHistory: () -> Unit
 ) {
     val background = colorResource(R.color.calculator_background)
     Scaffold(
@@ -55,10 +57,14 @@ fun HistoryScreen(
                         )
                     }
                 },
+                actions = {
+                    ClearHistoryButton(enabled = history.isNotEmpty(), onClick = onClearHistory)
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = background,
                     titleContentColor = colorResource(R.color.display_primary_text),
-                    navigationIconContentColor = colorResource(R.color.button_operator_background)
+                    navigationIconContentColor = colorResource(R.color.button_operator_background),
+                    actionIconContentColor = colorResource(R.color.button_operator_background)
                 )
             )
         }
@@ -68,6 +74,17 @@ fun HistoryScreen(
         } else {
             HistoryList(history = history, contentPadding = innerPadding)
         }
+    }
+}
+
+/** Botón para vaciar el historial; se desactiva cuando no hay registros. */
+@Composable
+private fun ClearHistoryButton(enabled: Boolean, onClick: () -> Unit) {
+    IconButton(onClick = onClick, enabled = enabled) {
+        Icon(
+            imageVector = Icons.Filled.Delete,
+            contentDescription = stringResource(R.string.history_clear_description)
+        )
     }
 }
 

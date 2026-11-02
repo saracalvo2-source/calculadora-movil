@@ -5,9 +5,11 @@ exclusivamente con Jetpack Compose y arquitectura MVVM.
 
 ## Funcionalidades
 - Dígitos 0–9, punto decimal, `+`, `−`, `×`, `÷`, `%`, `+/−`, `AC` y `=`.
+- Tecla `⌫` estilo iOS: mientras se escribe un número, `AC` pasa a `⌫` y borra el último dígito; al quedar en 0 o tras un resultado vuelve a ser `AC`.
 - Operaciones encadenadas (se resuelven de izquierda a derecha) y `=` repetido.
 - División por cero y entradas inválidas se informan en pantalla sin cerrar la app.
 - Historial de operaciones (`5 + 3 = 8`) con estado vacío y navegación de ida y vuelta.
+- Botón para borrar el historial (se desactiva cuando está vacío); no afecta el cálculo en curso.
 
 ## Arquitectura
 ```
