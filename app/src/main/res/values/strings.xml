@@ -26,19 +26,15 @@
     <string name="action_delete">⌫</string>
 
     <!-- Pantalla principal -->
-    <string name="initial_value">0</string>
     <string name="history_button">Historial</string>
-    <string name="history_button_description">Abrir historial de operaciones</string>
 
     <!-- Errores -->
     <string name="error_division_by_zero">No se puede dividir por cero</string>
     <string name="error_invalid_input">Entrada inválida</string>
-    <string name="error_display">Error</string>
 
     <!-- Historial -->
     <string name="history_title">Historial</string>
     <string name="history_empty">Aún no hay operaciones</string>
     <string name="history_back_description">Volver a la calculadora</string>
     <string name="history_clear_description">Borrar historial</string>
-    <string name="history_entry_format">%1$s %2$s %3$s = %4$s</string>
 </resources>
