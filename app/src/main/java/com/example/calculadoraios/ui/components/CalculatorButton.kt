@@ -18,15 +18,15 @@ import com.example.calculadoraios.R
 import com.example.calculadoraios.ui.keypad.CalculatorKey
 import com.example.calculadoraios.ui.keypad.KeyStyle
 
-private const val BUTTON_CORNER_PERCENT = 50
-private const val WIDE_BUTTON_EXTRA_RATIO = 0.08f
+private const val BUTTON_CORNER_PERCENT = 50  // 50% = botón circular
+private const val WIDE_BUTTON_EXTRA_RATIO = 0.08f  // Ancho extra para la tecla 0
 
 /**
  * Tecla estilo iOS (circular, o en forma de píldora si es ancha).
  * El color depende del estilo de la tecla y de si es el operador seleccionado.
  */
 @Composable
-fun CalculatorButton(
+fun CalculatorButton(  // Una tecla (se llama desde CalculatorScreen.kt)
     key: CalculatorKey,
     isActive: Boolean,
     onClick: () -> Unit,
@@ -35,16 +35,16 @@ fun CalculatorButton(
     val colors = buttonColors(key.style, isActive)
     Button(
         onClick = onClick,
-        shape = RoundedCornerShape(BUTTON_CORNER_PERCENT),
+        shape = RoundedCornerShape(BUTTON_CORNER_PERCENT),  // Forma redonda
         colors = ButtonDefaults.buttonColors(
             containerColor = colors.background,
             contentColor = colors.content
         ),
         contentPadding = PaddingValues(0.dp),
-        modifier = modifier.aspectRatio(aspectRatioFor(key.widthWeight))
+        modifier = modifier.aspectRatio(aspectRatioFor(key.widthWeight))  // Tecla redonda, la del 0 en forma de píldora
     ) {
         Text(
-            text = stringResource(key.labelRes),
+            text = stringResource(key.labelRes),  // Texto de la tecla desde strings.xml
             fontSize = 32.sp,
             fontWeight = FontWeight.Medium
         )
@@ -59,7 +59,7 @@ private fun aspectRatioFor(widthWeight: Float): Float =
 private data class ButtonColors(val background: Color, val content: Color)
 
 @Composable
-private fun buttonColors(style: KeyStyle, isActive: Boolean): ButtonColors = when (style) {
+private fun buttonColors(style: KeyStyle, isActive: Boolean): ButtonColors = when (style) {  // Colores según el tipo de tecla, desde colors.xml
     KeyStyle.NUMBER -> ButtonColors(
         background = colorResource(R.color.button_number_background),
         content = colorResource(R.color.button_number_text)
@@ -68,7 +68,7 @@ private fun buttonColors(style: KeyStyle, isActive: Boolean): ButtonColors = whe
         background = colorResource(R.color.button_control_background),
         content = colorResource(R.color.button_control_text)
     )
-    KeyStyle.OPERATOR -> if (isActive) {
+    KeyStyle.OPERATOR -> if (isActive) {  // Operación elegida: fondo blanco y texto naranja
         ButtonColors(
             background = colorResource(R.color.button_operator_active_background),
             content = colorResource(R.color.button_operator_active_text)

@@ -38,19 +38,19 @@ private val ITEM_SPACING = 8.dp
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HistoryScreen(
+fun HistoryScreen(  // Pantalla del historial (se llama desde AppNavigation.kt)
     history: List<HistoryEntry>,
     onBack: () -> Unit,
     onClearHistory: () -> Unit
 ) {
     val background = colorResource(R.color.calculator_background)
-    Scaffold(
+    Scaffold(  // Estructura con barra superior y contenido
         containerColor = background,
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.history_title)) },
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
+                    IconButton(onClick = onBack) {  // Flecha para volver
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.history_back_description)
@@ -58,7 +58,7 @@ fun HistoryScreen(
                     }
                 },
                 actions = {
-                    ClearHistoryButton(enabled = history.isNotEmpty(), onClick = onClearHistory)
+                    ClearHistoryButton(enabled = history.isNotEmpty(), onClick = onClearHistory)  // Papelera, desactivada si no hay historial
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = background,
@@ -69,10 +69,10 @@ fun HistoryScreen(
             )
         }
     ) { innerPadding ->
-        if (history.isEmpty()) {
+        if (history.isEmpty()) {  // Estado vacío
             EmptyHistory(modifier = Modifier.padding(innerPadding))
         } else {
-            HistoryList(history = history, contentPadding = innerPadding)
+            HistoryList(history = history, contentPadding = innerPadding)  // Lista de operaciones
         }
     }
 }
@@ -106,7 +106,7 @@ private fun EmptyHistory(modifier: Modifier = Modifier) {
 
 @Composable
 private fun HistoryList(history: List<HistoryEntry>, contentPadding: PaddingValues) {
-    LazyColumn(
+    LazyColumn(  // Lista que solo dibuja lo visible
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.calculator_background)),
@@ -118,7 +118,7 @@ private fun HistoryList(history: List<HistoryEntry>, contentPadding: PaddingValu
         ),
         verticalArrangement = Arrangement.spacedBy(ITEM_SPACING)
     ) {
-        items(history) { entry ->
+        items(history) { entry ->  // Un HistoryItem por cada operación
             HistoryItem(entry = entry)
         }
     }

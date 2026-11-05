@@ -4,7 +4,7 @@ package com.example.calculadoraios.model
  * Registro de una operación completada, por ejemplo 5 + 3 = 8.
  * Los operandos y el resultado se guardan ya formateados para mostrarse tal cual.
  */
-data class HistoryEntry(
+data class HistoryEntry(  // Un registro del historial, ej: 5 + 3 = 8
     val firstOperand: String,
     val operation: Operation,
     val secondOperand: String,

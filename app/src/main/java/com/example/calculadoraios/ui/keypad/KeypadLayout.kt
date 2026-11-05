@@ -8,17 +8,17 @@ import com.example.calculadoraios.viewmodel.CalculatorEvent
  * Distribución del teclado, fila por fila, replicando la calculadora de iOS.
  * Al estar declarada como datos, la pantalla solo la recorre y dibuja.
  */
-object KeypadLayout {
+object KeypadLayout {  // Distribución del teclado igual a iOS
 
     private const val WIDE_KEY_WEIGHT = 2f
 
-    private val clearKey = CalculatorKey(R.string.action_clear, CalculatorEvent.Clear, KeyStyle.CONTROL)
-    private val deleteKey = CalculatorKey(R.string.action_delete, CalculatorEvent.DeleteDigit, KeyStyle.CONTROL)
+    private val clearKey = CalculatorKey(R.string.action_clear, CalculatorEvent.Clear, KeyStyle.CONTROL)  // Tecla AC
+    private val deleteKey = CalculatorKey(R.string.action_delete, CalculatorEvent.DeleteDigit, KeyStyle.CONTROL)  // Tecla ⌫
 
     /** Filas del teclado; la primera tecla es ⌫ mientras se escribe y AC en otro caso. */
-    fun rows(showDeleteKey: Boolean): List<List<CalculatorKey>> = listOf(
+    fun rows(showDeleteKey: Boolean): List<List<CalculatorKey>> = listOf(  // Filas del teclado, de arriba a abajo
         listOf(
-            if (showDeleteKey) deleteKey else clearKey,
+            if (showDeleteKey) deleteKey else clearKey,  // ⌫ mientras se escribe, AC si no
             CalculatorKey(R.string.symbol_toggle_sign, CalculatorEvent.ToggleSign, KeyStyle.CONTROL),
             CalculatorKey(R.string.symbol_percent, CalculatorEvent.Percent, KeyStyle.CONTROL),
             operatorKey(R.string.symbol_divide, Operation.DIVIDE)
@@ -42,7 +42,7 @@ object KeypadLayout {
             operatorKey(R.string.symbol_add, Operation.ADD)
         ),
         listOf(
-            CalculatorKey(R.string.digit_0, CalculatorEvent.Digit(0), KeyStyle.NUMBER, WIDE_KEY_WEIGHT),
+            CalculatorKey(R.string.digit_0, CalculatorEvent.Digit(0), KeyStyle.NUMBER, WIDE_KEY_WEIGHT),  // El 0 ocupa doble ancho
             CalculatorKey(R.string.symbol_decimal, CalculatorEvent.Decimal, KeyStyle.NUMBER),
             CalculatorKey(R.string.symbol_equals, CalculatorEvent.Equals, KeyStyle.OPERATOR)
         )

@@ -13,7 +13,7 @@ import com.example.calculadoraios.viewmodel.CalculatorEvent
 import com.example.calculadoraios.viewmodel.CalculatorViewModel
 
 /** Rutas de navegación de la aplicación. */
-object AppRoutes {
+object AppRoutes {  // Nombres de las dos pantallas
     const val CALCULATOR = "calculator"
     const val HISTORY = "history"
 }
@@ -23,26 +23,26 @@ object AppRoutes {
  * para que ambas pantallas compartan el mismo estado (incluido el historial).
  */
 @Composable
-fun AppNavigation(viewModel: CalculatorViewModel = viewModel()) {
-    val navController = rememberNavController()
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+fun AppNavigation(viewModel: CalculatorViewModel = viewModel()) {  // Un solo ViewModel compartido por las dos pantallas
+    val navController = rememberNavController()  // Controla el cambio de pantalla
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()  // Observa el estado del ViewModel, la UI se redibuja cuando cambia
 
-    NavHost(
+    NavHost(  // Contenedor de pantallas, arranca en la calculadora
         navController = navController,
         startDestination = AppRoutes.CALCULATOR
     ) {
-        composable(AppRoutes.CALCULATOR) {
+        composable(AppRoutes.CALCULATOR) {  // Pantalla de la calculadora
             CalculatorScreen(
                 uiState = uiState,
-                onEvent = viewModel::onEvent,
-                onOpenHistory = { navController.navigate(AppRoutes.HISTORY) }
+                onEvent = viewModel::onEvent,  // Los botones envían sus eventos a onEvent del ViewModel
+                onOpenHistory = { navController.navigate(AppRoutes.HISTORY) }  // Ir al historial
             )
         }
-        composable(AppRoutes.HISTORY) {
+        composable(AppRoutes.HISTORY) {  // Pantalla del historial
             HistoryScreen(
                 history = uiState.history,
-                onBack = { navController.popBackStack() },
-                onClearHistory = { viewModel.onEvent(CalculatorEvent.ClearHistory) }
+                onBack = { navController.popBackStack() },  // Volver a la calculadora
+                onClearHistory = { viewModel.onEvent(CalculatorEvent.ClearHistory) }  // Borrar historial
             )
         }
     }

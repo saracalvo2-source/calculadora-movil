@@ -8,7 +8,7 @@ import com.example.calculadoraios.model.Operation
  * Estado inmutable que la UI representa.
  * Contiene únicamente datos; la traducción a textos y colores ocurre en Compose.
  */
-data class CalculatorUiState(
+data class CalculatorUiState(  // Lo crea y actualiza CalculatorViewModel, lo muestra la UI
     /** Número que se está escribiendo o último resultado. */
     val displayValue: String = "0",
     /** Primer operando ya confirmado, mostrado como vista previa de la expresión. */

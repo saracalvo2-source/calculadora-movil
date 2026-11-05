@@ -20,7 +20,7 @@ import com.example.calculadoraios.model.HistoryEntry
 
 /** Fila del historial: expresión en gris y resultado destacado, alineados a la derecha. */
 @Composable
-fun HistoryItem(entry: HistoryEntry, modifier: Modifier = Modifier) {
+fun HistoryItem(entry: HistoryEntry, modifier: Modifier = Modifier) {  // Una operación del historial
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -29,14 +29,14 @@ fun HistoryItem(entry: HistoryEntry, modifier: Modifier = Modifier) {
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         Text(
-            text = "${entry.firstOperand} ${operationSymbol(entry.operation)} ${entry.secondOperand}",
+            text = "${entry.firstOperand} ${operationSymbol(entry.operation)} ${entry.secondOperand}",  // Ej: 5 + 3
             fontSize = 20.sp,
             color = colorResource(R.color.display_secondary_text),
             textAlign = TextAlign.End,
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "${stringResource(R.string.symbol_equals)} ${entry.result}",
+            text = "${stringResource(R.string.symbol_equals)} ${entry.result}",  // Ej: = 8
             fontSize = 28.sp,
             fontWeight = FontWeight.SemiBold,
             color = colorResource(R.color.display_primary_text),

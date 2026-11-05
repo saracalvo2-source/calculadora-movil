@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import com.example.calculadoraios.viewmodel.CalculatorEvent
 
 /** Estilo visual de una tecla, según su función. */
-enum class KeyStyle {
+enum class KeyStyle {  // Tipo de tecla, define su color
     NUMBER,
     OPERATOR,
     CONTROL
@@ -14,7 +14,7 @@ enum class KeyStyle {
  * Descripción de una tecla del teclado: qué texto muestra, qué evento emite
  * y cuánto espacio ocupa en su fila (el 0 de iOS ocupa el doble).
  */
-data class CalculatorKey(
+data class CalculatorKey(  // Datos de una tecla
     @StringRes val labelRes: Int,
     val event: CalculatorEvent,
     val style: KeyStyle,

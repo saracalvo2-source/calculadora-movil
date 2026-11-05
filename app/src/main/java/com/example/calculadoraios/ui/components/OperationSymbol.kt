@@ -8,7 +8,7 @@ import com.example.calculadoraios.model.Operation
 
 /** Traduce una operación del modelo al símbolo definido en strings.xml. */
 @Composable
-fun operationSymbol(operation: Operation): String = stringResource(
+fun operationSymbol(operation: Operation): String = stringResource(  // Operación a símbolo (+ − × ÷) desde strings.xml
     when (operation) {
         Operation.ADD -> R.string.symbol_add
         Operation.SUBTRACT -> R.string.symbol_subtract
@@ -19,7 +19,7 @@ fun operationSymbol(operation: Operation): String = stringResource(
 
 /** Traduce un error semántico del modelo al mensaje definido en strings.xml. */
 @Composable
-fun errorMessage(error: CalculatorError): String = stringResource(
+fun errorMessage(error: CalculatorError): String = stringResource(  // Error a mensaje desde strings.xml
     when (error) {
         CalculatorError.DIVISION_BY_ZERO -> R.string.error_division_by_zero
         CalculatorError.INVALID_INPUT -> R.string.error_invalid_input

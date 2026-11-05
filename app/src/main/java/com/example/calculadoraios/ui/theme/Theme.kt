@@ -12,7 +12,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun CalculadoraIOsTheme(content: @Composable () -> Unit) {
+fun CalculadoraIOsTheme(content: @Composable () -> Unit) {  // Tema oscuro de la app (se usa en MainActivity.kt)
     MaterialTheme(
         colorScheme = DarkColorScheme,
         typography = Typography,

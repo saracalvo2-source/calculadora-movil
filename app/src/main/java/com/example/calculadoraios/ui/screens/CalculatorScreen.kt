@@ -34,28 +34,28 @@ private val KEY_SPACING = 12.dp
  * no contiene reglas de cálculo.
  */
 @Composable
-fun CalculatorScreen(
+fun CalculatorScreen(  // Pantalla principal (se llama desde AppNavigation.kt)
     uiState: CalculatorUiState,
     onEvent: (CalculatorEvent) -> Unit,
     onOpenHistory: () -> Unit
 ) {
-    Column(
+    Column(  // Historial, display y teclado de arriba a abajo
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.calculator_background))
-            .safeDrawingPadding()
+            .safeDrawingPadding()  // No queda debajo de la barra del celular
             .padding(SCREEN_PADDING),
         verticalArrangement = Arrangement.Bottom
     ) {
-        HistoryLink(onClick = onOpenHistory, modifier = Modifier.weight(1f))
-        CalculatorDisplay(
+        HistoryLink(onClick = onOpenHistory, modifier = Modifier.weight(1f))  // Botón Historial
+        CalculatorDisplay(  // Display de números (components/CalculatorDisplay.kt)
             displayValue = uiState.displayValue,
             pendingOperand = uiState.pendingOperand,
             pendingOperation = uiState.pendingOperation,
             error = uiState.error,
             modifier = Modifier.padding(bottom = KEY_SPACING)
         )
-        Keypad(
+        Keypad(  // Teclado
             activeOperation = uiState.pendingOperation,
             showDeleteKey = uiState.canDeleteDigit,
             onEvent = onEvent
@@ -89,16 +89,16 @@ private fun Keypad(
     onEvent: (CalculatorEvent) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(KEY_SPACING)) {
-        KeypadLayout.rows(showDeleteKey).forEach { row ->
+        KeypadLayout.rows(showDeleteKey).forEach { row ->  // Recorre las filas del teclado (keypad/KeypadLayout.kt)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(KEY_SPACING)
             ) {
-                row.forEach { key ->
-                    CalculatorButton(
+                row.forEach { key ->  // Dibuja cada tecla
+                    CalculatorButton(  // components/CalculatorButton.kt
                         key = key,
                         isActive = isActiveOperator(key, activeOperation),
-                        onClick = { onEvent(key.event) },
+                        onClick = { onEvent(key.event) },  // Al tocar la tecla envía su evento al ViewModel
                         modifier = Modifier.weight(key.widthWeight)
                     )
                 }
@@ -108,7 +108,7 @@ private fun Keypad(
 }
 
 /** Una tecla se resalta solo si es el operador pendiente de resolver. */
-private fun isActiveOperator(key: CalculatorKey, activeOperation: Operation?): Boolean {
+private fun isActiveOperator(key: CalculatorKey, activeOperation: Operation?): Boolean {  // Resalta la operación elegida
     val event = key.event
     return event is CalculatorEvent.Operator && event.operation == activeOperation
 }
